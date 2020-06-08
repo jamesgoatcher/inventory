@@ -10,56 +10,133 @@ results = document.getElementById('output--results'),
 preview = document.getElementById('preview'),
 themeCount = 0,
 introAnimCount = 1,
-rootFolders = ['video_games', 'graphic_novels', 'ec_archives', 'magazines', 'comics', 'magic', 'misc'],
+rootFolders = ['video_games', 'graphic_novels', 'ec_archives', 'magazines', 'comics', 'magic', 'guitars', 'vinyl', 'misc'],
 data; // JSON
 
-/* Loading interval */
-function LOADING_INTRO_INTERVAL () {
-	if (introAnimCount == 1) {
-		let
-		container = document.createElement('div'),
-		anim = document.createElement('div');
-
-		container.classList.add('container--intro_anim');
-		anim.classList.add('intro_anim');
-
-		container.appendChild(anim);
-		body.appendChild(container);
-
-		body.style.visibility = 'visible';
+const
+LOADING_INTRO_DATA = {
+	header: 
+	`<div>JPG.Inventory</div>
+	<div>GAMI (Graphical Asset Management Interface)</div>
+	<div>Version 2.0.1</div>`,
+	copyright:
+	`<div class="intro_data--row">Copyright &copy; 2019, 2020</div>
+	<div>James P. Goatcher dba JPG</div>
+	<div>All Rights Reserved</div>`,
+	memory: 
+	`<div class="intro_data--row">real &nbsp;mem = <span id="Intro_RealMem"></span> TB;</div>
+	<div>avail mem = <span id="Intro_AvailMem"></span> TB;</div>`,
+	cache: 
+	`<div class="intro_data--row">primary data cache : 1.05 TB;</div>
+	<div>primary inst.cache : 1.25 TB;</div>
+	<div>secondary cache &nbsp;&nbsp;&nbsp;: 53.5 TB;</div>`,
+	user:
+	`<div class="intro_data--row">username: <span class="hidden" id="Intro_Username"></span></div>`,
+	pw:
+	`<div>password: <span id="Intro_Password"></span></div>`,
+	command: 
+	`<div class="intro_data--row">> <span id="Intro_Command"></span></div>`,
+	results:
+	`<div class="intro_data--row">reading "manifest.log"</div>
+	<div class="intro_data--row">loading "jpg.inv.min"</div>
+	<div class="intro_data--row intro_data--loading_bar"><div id="Intro_LoadingBar"></div></div>`,
+	fns: {
+		iterateToLimit: function (el, incSpeed, limit) {
+			let init = 0;
+			let interval = setInterval(function () {
+				el.innerText = init;
+				if (init >= limit) clearInterval(interval);
+				init += incSpeed;
+			}, 1);
+		},
+		lettersOnInterval: function (el, incSpeed, stringToInterval) {
+			let 
+			mutatedString = stringToInterval.split(''),
+			index = 0;
+			let interval = setInterval(function () {
+				el.innerText += mutatedString[index];
+				if (index >= mutatedString.length - 1) clearInterval(interval);
+				index++;
+			}, incSpeed);
+		}
 	}
+};
 
+/* Loading Screen 2.0 */
+function LOADING_SCREEN_V_2 () {
 	let
-	arr = ['Initializing', 'Initializing.', 'Initializing..', 'Initializing...'],
-	anim = document.querySelector('.intro_anim');
+	background = document.createElement('div'),
+	container = document.createElement('div');
+	// Attributes
+	background.classList.add('container--intro_anim');
+	container.classList.add('intro_anim');
+	container.classList.add('v2');
+	container.id = 'Intro_Container';
+	container.innerHTML = `
+	${LOADING_INTRO_DATA.header}
+	${LOADING_INTRO_DATA.copyright}
+	${LOADING_INTRO_DATA.memory}
+	${LOADING_INTRO_DATA.cache}
+	${LOADING_INTRO_DATA.user}
+	${LOADING_INTRO_DATA.pw}
+	${LOADING_INTRO_DATA.command}
+	${LOADING_INTRO_DATA.results}`;
+	// To DOM
+	background.appendChild(container);
+	body.appendChild(background);
+	body.style.visibility = 'visible';
+	// Activate rows
+	setTimeout(function () {
+		let
+		introChildren = Array.from(document.querySelectorAll('#Intro_Container > div')),
+		introRealMem = document.querySelector('#Intro_RealMem'),
+		introAvailMem = document.querySelector('#Intro_AvailMem'),
+		introUsername = document.querySelector('#Intro_Username'),
+		introPassword = document.querySelector('#Intro_Password'),
+		introCommand = document.querySelector('#Intro_Command'),
+		introLoadingBar = document.querySelector('#Intro_LoadingBar'),
+		randUserNum = util.randomNumberGenerator(87653, 12345);
+		// Variables
+		introUsername.innerHTML = `guest_${randUserNum}`;
+		// Make visible
+		introChildren[0].classList.add('visible');
+		setTimeout(function () { introChildren[1].classList.add('visible'); }, 100);
+		setTimeout(function () { introChildren[2].classList.add('visible'); }, 200);
+		setTimeout(function () { introChildren[3].classList.add('visible'); }, 300);
+		setTimeout(function () { introChildren[4].classList.add('visible'); }, 500);
+		setTimeout(function () { introChildren[5].classList.add('visible'); }, 600);
+		setTimeout(function () { // real memory
+			introChildren[6].classList.add('visible');
+			LOADING_INTRO_DATA.fns.iterateToLimit(introRealMem, 80, 8200);
+		}, 800);
+		setTimeout(function () { // avail memory
+			introChildren[7].classList.add('visible');
+			LOADING_INTRO_DATA.fns.iterateToLimit(introAvailMem, 80, 32800);
+		}, 1350);
+		setTimeout(function () { introChildren[8].classList.add('visible'); }, 3500);
+		setTimeout(function () { introChildren[9].classList.add('visible'); }, 3600);
+		setTimeout(function () { introChildren[10].classList.add('visible'); }, 3700);
+		setTimeout(function () { // username
+			introChildren[11].classList.add('visible');
+			setTimeout(function () { introUsername.classList.remove('hidden'); }, 600);
+		}, 3900);
+		setTimeout(function () { // password
+			introChildren[12].classList.add('visible');
+			setTimeout(function () { LOADING_INTRO_DATA.fns.lettersOnInterval(introPassword, 125, '*********') }, 500);
+		}, 4900);
+		setTimeout(function () { // command
+			introChildren[13].classList.add('visible');
+			setTimeout(function () { LOADING_INTRO_DATA.fns.lettersOnInterval(introCommand, 75, 'device -dv | -a') }, 300);
+		}, 7200);
+		setTimeout(function () { introChildren[14].classList.add('visible'); }, 9400);
+		setTimeout(function () { introChildren[15].classList.add('visible'); }, 10600);
+		setTimeout(function () { // loading bar
+			introChildren[16].classList.add('visible');
+			introLoadingBar.classList.add('loadBarTo100');
+		}, 10700);
+		setTimeout(function () { document.querySelector('.container--intro_anim').remove(); }, 12500); // original intro anim - remove div
 
-	switch (introAnimCount) {
-		case 1:
-		case 5:
-		case 9:
-			anim.innerHTML = arr[0];
-		break;
-
-		case 2:
-		case 6:
-		case 10:
-			anim.innerHTML = arr[1];
-		break;
-
-		case 3:
-		case 7:
-		case 11:
-			anim.innerHTML = arr[2];
-		break;
-
-		case 4:
-		case 8:
-		case 12:
-			anim.innerHTML = arr[3];
-		break;
-	}
-
-	introAnimCount++;
+	}, 200);
 };
 
 /* Cookies */
@@ -233,7 +310,7 @@ app = {
 	/* Collapse all into parent directory */
 	PARENT_DIRECTORY: () => {
 		let
-		array = document.querySelectorAll(`div.nav--row:not([data-row="video_games"]):not([data-row="graphic_novels"]):not([data-row="ec_archives"]):not([data-row="magazines"]):not([data-row="comics"]):not([data-row="magic"]):not([data-row="misc"]):not(#parent_directory)`);
+		array = document.querySelectorAll(`div.nav--row:not([data-row="video_games"]):not([data-row="graphic_novels"]):not([data-row="ec_archives"]):not([data-row="magazines"]):not([data-row="comics"]):not([data-row="magic"]):not([data-row="guitars"]):not([data-row="vinyl"]):not([data-row="misc"]):not(#parent_directory)`);
 		// Remove all opened folders
 		for (let i = 0; i < array.length; i++) {
 			array[i].remove();
@@ -247,6 +324,8 @@ app = {
 		document.querySelector('[data-row="magazines"]').setAttribute('data-bool', false);
 		document.querySelector('[data-row="comics"]').setAttribute('data-bool', false);
 		document.querySelector('[data-row="magic"]').setAttribute('data-bool', false);
+		document.querySelector('[data-row="guitars"]').setAttribute('data-bool', false);
+		document.querySelector('[data-row="vinyl"]').setAttribute('data-bool', false);
 		document.querySelector('[data-row="misc"]').setAttribute('data-bool', false);
 
 		app.ACTIVE_ROW('collapse', 'root');
@@ -663,6 +742,9 @@ app = {
 			case 'same':
 				window.open('http://jamesgoatcher.com', '_self');
 				break;
+			case 'refresh':
+				initFnsRefresh();
+				break;
 			default:
 				location.reload();
 				break;
@@ -729,15 +811,17 @@ util = {
 
 		xhttp.open('GET', 'js/data.json', true);
 		xhttp.send();
-	}
+	},
+	/* Random number generator */
+	randomNumberGenerator: (limit, limiter) => {
+    // Limiter reverts to zero when array index needed; real nums need one
+    return Math.floor( (Math.random() * limit) + (limiter || 0) );
+  }
 };
 
 /*=================================
 =            Initialize           =
 =================================*/
-let
-setIntroAnim = setInterval(LOADING_INTRO_INTERVAL, 100);
-
 const
 /* DOM events */
 eventListeners = () => {
@@ -750,24 +834,41 @@ eventListeners = () => {
 		document.querySelectorAll('[data-theme]')[i].addEventListener('click', app.CHANGE_COLOR_THEME.bind(this, document.querySelectorAll('[data-theme]')[i].dataset.theme), false);
 	}
 },
+initFnsRefresh = () => {
+	// Remove all categories
+	let 
+	navRows = Array.from(document.querySelectorAll('.nav--row')),
+	outputResults = document.querySelector('#output--results'),
+	outputLocation = document.querySelector('#output--location');
+	for (let i = 1; i < navRows.length; i++) {
+		navRows[i].remove();
+	}
+	outputResults.innerHTML = '';
+	outputLocation.innerHTML = '';
+	// Reload elements
+	util.loadJSON();
+	setTimeout(function () {
+		app.GENERATE_CATEGORY_FOLDER();
+		app.IS_MOBILE(); // Apply isMobile class to Aside to compensate for mobile browser footer
+	}, 1500);
+},
 /* Initialze */
 initFns = () => {
+	LOADING_SCREEN_V_2(); // intro screen 2.0
 	eventListeners();
 	util.loadJSON();
 
 	setTimeout(function () {
 		app.GENERATE_CATEGORY_FOLDER();
-		// app.WELCOME_MODULE();
+	//  app.WELCOME_MODULE();
 	// 	setCookie('inventory_cookie','visited', 30);
 	// 	let 
 	// 	x = getCookie('inventory_cookie');
 	// 	if (x) {
 	// 		app.WELCOME_MODULE();
 	// 	}
-		util.clearInterval(setIntroAnim);
 		app.IS_MOBILE(); // Apply isMobile class to Aside to compensate for mobile browser footer
-		document.querySelector('.container--intro_anim').remove();
-	}, 1000);
+	}, 1500);
 };
 /* Load script.js */
 document.onreadystatechange = function () {

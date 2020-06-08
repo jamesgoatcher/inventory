@@ -64,6 +64,7 @@ body {
 	width: 100%;
 	height: 100%;
 	background-color: #fff;
+	padding: 1rem;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -72,6 +73,54 @@ body {
 
 .intro_anim {
 	font-size: 18px;
+} 
+
+/* loading animation - v2 */
+.intro_anim.v2 {
+	padding: 2rem;
+	font-family: monospace;
+	border: 1px solid #000;
+}
+
+#Intro_Container > div {
+	visibility: hidden;
+	line-height: 1.1;
+}
+
+#Intro_Container > .visible {
+	visibility: visible;
+}
+
+.intro_data--row {
+	margin-top: 1rem;
+}
+
+#Intro_Username.hidden {
+	visibility: hidden;
+}
+
+.intro_data--loading_bar {
+	width: 50%;
+	height: 2rem;
+	border: 1px solid #000;
+}
+
+#Intro_LoadingBar {
+	height: 100%;
+	background-color: #000;
+}
+
+.loadBarTo100 {
+	animation-name: loadBarAnim;
+	animation-duration: 1500ms;
+}
+
+@keyframes loadBarAnim {
+	0%   { width: 0%;   }
+	10%  { width: 25%;  }
+	20%  { width: 50%;  }
+	40%  { width: 85%;  }
+	100% { width: 100%; }
 }
 
 /* welcome curtain */
@@ -287,12 +336,14 @@ aside {
 			z-index: 100;
 			outline-color: var(--active_color);
 			outline-width: thin;
+			user-select: none;
 		}
 
 		div#nav--folders .nav--row.activeRow {
 			background-color: var(--active_color);;
 		} div#nav--folders .nav--row.activeRow > span {
 			color: var(--bg_color);
+			user-select: none;
 		}
 
 		div#nav--folders .nav--row.activeRow.parent {
@@ -505,12 +556,13 @@ aside {
 				-webkit-transition: transform 0.33s;
 				transition: transform 0.33s;
 			} aside > div:last-of-type.nav--container.mobile-slide {
+				overflow-x: hidden;
 				-webkit-transform: translateX(0);
 				transform: translateX(0);
 			}
 
 		#output--results {
-			height: 100%;
+			height: auto;
 		}
 
 			#output--results > .results--img {

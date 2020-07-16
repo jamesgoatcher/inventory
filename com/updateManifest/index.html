@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	<meta name="author" content="http://jamesgoatcher.com">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, shrink-to-fit=no">
+	<link href="https://fonts.googleapis.com/css?family=Muli:300,400,700" rel="stylesheet">
+	<link href="/css/styles.css" rel="stylesheet" type="text/css" >
+	<title>JPG.Inventory - Update Manifest</title>
+</head>
+<body>
+	<header>
+		<h1>JPG.Inventory - Update Manifest</h1>
+	</header>
+	<div class="container">
+		<main>
+			<div>
+				<label>Category</label>
+				<select id="category">
+					<option value="void"></option>
+				</select>
+			</div>
+			<div>
+				<label>Subcategory</label>
+				<select id="subcategory"></select>
+			</div>
+			<div>
+				<label class="relative">Item Name <span class="naming-conventions">(View Naming Conventions)</span><div class="show-naming-conventions"><ul><li>Use : to denote sub-titles</li><li>Use :: to separate album artists from title</li></ul></div></label>
+				<input id="name" type="text" autocomplete="off">
+			</div>
+			<div>
+				<label>Item Description</label>
+				<textarea id="description" onkeyup="this.value = this.value.replace(/'/g, '&rsquo;');"></textarea>
+			</div>
+			<div class="mb-1">
+				<button id="add-to-manifest" class="disabled">Add to Manifest</button>
+				<button id="generate-new-manifest" class="hide">Download New Manifest</button>
+			</div>
+			<div class="items-in-folder-cont">
+				<label>Items in Folder</label>
+				<div id="items-in-folder"></div>
+			</div>
+		</main>
+		<aside>
+			<div class="display-container">
+				<div class="display-header">
+					<div id="json-new-tab" class="active"><span>New code</span></div>
+					<div id="json-full-tab"><span>Full JSON</span></div>
+				</div>
+				<div id="display-json"></div>
+				<div id="error-display" class="hide"></div>
+			</div>
+		</aside>
+	</div>
+	<script type="module" src="js/updateManifest.js"></script>
+</body>
+</html>

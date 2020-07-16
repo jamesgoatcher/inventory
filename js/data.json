@@ -17,6 +17,8 @@
         "grand_theft_auto_III",
         "grand_theft_auto_san_andreas",
         "grand_theft_auto_vice_city",
+        "mega_man_anniversary_collection",
+        "mega_man_x_collection",
         "shadow_of_the_colossus",
         "suikoden_tactics"
       ],
@@ -734,7 +736,7 @@
         "steely_dan_==_aja",
         "styx_==_the_grand_illusion",
         "sublime_==_sublime",
-        "sunny_day_real_estate_==_sunny_day_real_estate",
+        "sunny_day_real_estate_==_diary",
         "thin_lizzy_==_jailbreak",
         "tom_petty_==_full_moon_fever",
         "tom_petty_and_the_heartbreakers_==_damn_the_torpedoes",
@@ -919,6 +921,18 @@
     },
     "video_games--playstation_2--grand_theft_auto_vice_city": {
     	"notes": "Not the best GTA in terms of everything but I like it for the 80s nostalgia value.",
+    	"misc1": "",
+    	"misc2": "",
+    	"misc3": ""
+    },
+    "video_games--playstation_2--mega_man_anniversary_collection": {
+    	"notes": "Megaman 2 - 4 are diamonds. Megaman 1 and 5 are gold. Megaman 6 is silver.",
+    	"misc1": "",
+    	"misc2": "",
+    	"misc3": ""
+    },
+    "video_games--playstation_2--mega_man_x_collection": {
+    	"notes": "Rather than shelling out hundreds of dollars for Megaman X3 on the SNES I opted for this version so I could take advantage of my component cable connection.",
     	"misc1": "",
     	"misc2": "",
     	"misc3": ""
@@ -4589,7 +4603,7 @@
       "misc2": "",
       "misc3": ""
     },
-    "vinyl--lp--sunny_day_real_estate_==_sunny_day_real_estate": {
+    "vinyl--lp--sunny_day_real_estate_==_diary": {
       "notes": "One of the most influential emo albums of all time.",
       "misc1": "",
       "misc2": "",

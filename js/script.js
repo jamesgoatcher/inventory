@@ -845,6 +845,7 @@ initFnsRefresh = () => {
 	}
 	outputResults.innerHTML = '';
 	outputLocation.innerHTML = '';
+	app.MOBILE_OUTPUT_SLIDE_IN('off');
 	// Reload elements
 	util.loadJSON();
 	setTimeout(function () {

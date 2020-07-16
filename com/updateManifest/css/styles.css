@@ -198,6 +198,48 @@ button {
 	display: block;
 }
 
+#about {
+	position: absolute;
+	right: 0;
+	top: 0;
+	padding-top: 2rem;
+	padding-right: 1rem;
+	cursor: pointer;
+} #about:hover {
+	font-weight: bolder;
+}
+
+#about-modal {
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 33.33%;
+	height: 100%;
+	padding: 2rem 1rem;
+	background-color: #fff;
+	border-left: 1px solid #000;
+	-webkit-transform: translateX(100%);
+	transform: translateX(100%);
+	-webkit-transition: transform 0.33s;
+	transition: transform 0.33s;
+	-webkit-transition-timing-function: ease-in;
+	transition-timing-function: ease-in;
+	z-index: 5000;
+} #about-modal.active {
+	-webkit-transform: translateX(0%);
+	transform: translateX(0%);
+}
+
+#about-modal > div {
+	margin-bottom: 2rem;
+}
+
+#about-close {
+	cursor: pointer;
+} #about-close:hover {
+	font-weight: bolder;
+}
+
 /*CLASSES*/
 .hide {
 	display: none;

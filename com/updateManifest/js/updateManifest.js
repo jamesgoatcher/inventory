@@ -13,6 +13,8 @@ newJsonTab             = document.querySelector('#json-new-tab'), // Display new
 fullJsonTab            = document.querySelector('#json-full-tab'), // Display full JSON tab
 displayJSON            = document.querySelector('#display-json'), // Display the JSON
 errorDisplay           = document.querySelector('#error-display'), // Display validation errors
+aboutBtn 							 = document.querySelector('#about'), // About trigger, open
+closeAboutBtn 				 = document.querySelector('#about-close'), // About trigger, close
 dataReq                = new Request('js/data.json'); // JSON file
 
 let
@@ -231,12 +233,34 @@ getManifest = (option) => {
 },
 
 downloadNewManifest = () => {
+	dataJsonSent = manifestFullTemp;
 
+	let 
+	timeStamp = new Date().getTime(),
+	dataJsonString = `data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(dataJsonSent))}`,
+  downloadAnchor = document.createElement('a');
+
+  downloadAnchor.setAttribute('href', dataJsonString);
+  downloadAnchor.setAttribute('download', `data--${timeStamp}.json`);
+  document.body.appendChild(downloadAnchor);
+  downloadAnchor.click();
+  downloadAnchor.remove();
+
+  callDebug();
+},
+
+toggleAboutModal = () => {
+	let aboutModal = document.querySelector('#about-modal');
+	if (aboutModal.classList.contains('active')) aboutModal.classList.remove('active');
+	else aboutModal.classList.add('active');
 };
 
 // Utility
 const
 eventListeners = () => {
+	// About modal slide in/out
+	aboutBtn.addEventListener('click', toggleAboutModal, false);
+	closeAboutBtn.addEventListener('click', toggleAboutModal, false);
 	// Populate sub drop
 	categoryEl.addEventListener('change', populateSubDropdown, false);
 	// Populate items in folder

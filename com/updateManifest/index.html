@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	<meta name="author" content="http://jamesgoatcher.com">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, shrink-to-fit=no">
+	<link href="https://fonts.googleapis.com/css?family=Muli:300,400,700" rel="stylesheet">
+	<link href="css/styles.css" rel="stylesheet" type="text/css" >
+	<title>JPG.Inventory - Manifest Generator</title>
+</head>
+<body>
+	<header>
+		<h1>JPG.Inventory - Manifest Generator</h1>
+	</header>
+	<div class="container">
+		<main>
+			<div>
+				<label>Category</label>
+				<select id="category">
+					<option value="void"></option>
+				</select>
+			</div>
+			<div>
+				<label>Subcategory</label>
+				<select id="subcategory"></select>
+			</div>
+			<div>
+				<label class="relative">Item Name <span class="naming-conventions">(View Naming Conventions)</span><div class="show-naming-conventions"><ul><li>Use : to denote sub-titles</li><li>Use :: to separate album artists from title</li></ul></div></label>
+				<input id="name" type="text" autocomplete="off">
+			</div>
+			<div>
+				<label>Item Description</label>
+				<textarea id="description" onkeyup="this.value = this.value.replace(/'/g, '&rsquo;');"></textarea>
+			</div>
+			<div class="mb-1">
+				<button id="add-to-manifest" class="disabled">Add to Manifest</button>
+				<button id="generate-new-manifest" class="hide">Download New Manifest</button>
+			</div>
+			<div class="items-in-folder-cont">
+				<label>Items in Folder</label>
+				<div id="items-in-folder"></div>
+			</div>
+		</main>
+		<aside>
+			<div class="display-container">
+				<div class="display-header">
+					<div id="json-new-tab" class="active"><span>New code</span></div>
+					<div id="json-full-tab"><span>Full JSON</span></div>
+				</div>
+				<div id="display-json"></div>
+				<div id="error-display" class="hide"></div>
+			</div>
+		</aside>
+	</div>
+	<div id="about">About</div>
+	<div id="about-modal">
+		<div id="about-close">Close</div>
+		<label>What is JPG.Inventory?</label>
+		<div>
+			<a href="http://jamesgoatcher.com/inventory" target="_blank">JPG.Inventory</a> is simultaneously a visual item management app and a vanity project born out of intense collecting and obsessive organization.
+		</div>
+		<label>What is the manifest?</label>
+		<div>
+			The Inventory app is powered by a rather large JSON file with two root nodes. One node contains the folder structure and labels needed to keep the app organized and the other contains the individual item details.
+		</div>
+		<label>Why is this app helpful?</label>
+		<div>
+			Updating a large JSON file manually is both tedious and dangerous. Making programmatic updates to the manifest greatly reduces the chance of error and the visual component makes the changes more relatable.
+		</div>
+		<label>What can be improved?</label>
+		<div>An option in the Subcategory dropdown to create a new folder. It would be great to prettify the JSON window view. Maybe some tasteful animations?</div>
+	</div>
+	<script type="module" src="js/updateManifest.js"></script>
+</body>
+</html>
